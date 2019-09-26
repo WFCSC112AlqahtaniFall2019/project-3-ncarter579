@@ -23,6 +23,7 @@ int main() {
 
     // define an integer pointer dynamically allocate an array of integers
     /* your code here */
+    int *array = new int[length];
 
     // initialize and print input
     cout << "Unsorted:" << endl;
@@ -34,6 +35,10 @@ int main() {
 
     // copy the random list of integers from vector to array
     /* your code here */
+    for(int i = 0; i < length; i++){
+        *(array + i) = v.at(i);
+    }
+
 
     clock_t start_mergeSort = clock();
     // sort vector using mergeSort
@@ -51,6 +56,7 @@ int main() {
     clock_t start_bubbleSort = clock();
     // sort array using bubbleSort
     /* your code here */
+    bubbleSort(array, length);
     clock_t end_bubbleSort = clock();
 
 
@@ -111,9 +117,20 @@ void mergeSort(vector<int>& a, vector<int>& tmp, int left, int right) {
 // Swap function
 void swap(int *a, int *b) {
     /* your code here */
+    int temp;
+    *a = temp;
+    temp = *b;
+    *b = *a;
 }
 
 // BubbleSort function
 void bubbleSort(int *a, int n) {
     /* your code here */
+    while(n < *a){
+        for(int i = 0; i < n -1; i++){
+            if(a[i] > a[i+1]){
+                swap(a[i], a[i+1]);
+            }
+        }
+    }
 }
