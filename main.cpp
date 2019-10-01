@@ -12,10 +12,20 @@ void mergeSortedLists(vector<int>& a, vector<int>& tmp, int leftPos, int rightPo
 void swap (int *a, int *b);
 void bubbleSort(int *a, int n);
 
-int main() {
+int main(int argc, char *argv[]) {
     // get input: first is random seed, second is vector length
     int seed, length;
-    cin >> seed >> length;
+
+    seed = atoi(argv[1]);
+    length = atoi(argv[2]);
+
+    if(argc != 3){
+        cout << "Enter seed and length into BubbleSort" << endl;
+        return 1;
+    }
+
+
+  //  cin >> seed >> length;
     srand(seed);
 
     vector<int> v(length); // vector to be sorted
@@ -26,7 +36,7 @@ int main() {
     int *array = new int[length];
 
     // initialize and print input
-    cout << "Unsorted:" << endl;
+    cout << "Unsorted values:" << endl;
     for (int i = 0; i < v.size(); i++) {
         v.at(i) = rand() % 100;
         cout << v.at(i) << '\t';
@@ -52,6 +62,9 @@ int main() {
 
     // check output, make sure array is sorted after bubbleSort
     /* your code here */
+    for(int i = 0; i < length - 1; i++) {
+        assert(array[i] <= array[i + 1]);
+    }
 
     clock_t start_bubbleSort = clock();
     // sort array using bubbleSort
@@ -61,7 +74,7 @@ int main() {
 
 
     // print sorted vector after mergeSort
-    cout << "Sorted:" << endl;
+    cout << "Sorted mergeSort" << endl;
     for (int i = 0; i < v.size(); i++) {
         cout << v.at(i) << '\t';
     }
@@ -69,6 +82,11 @@ int main() {
 
     // print sorted array after bubbleSort
     /* your code here */
+    cout << "Sorted BubbleSort" << endl;
+    for(int i = 0; i < length; i++){
+        cout << array[i] << " ";
+    }
+    cout << endl;
 
     // print elapsed time for mergeSort and bubbleSort
     double elapsed_mergeSort = double(end_mergeSort - start_mergeSort) / CLOCKS_PER_SEC;
@@ -118,19 +136,25 @@ void mergeSort(vector<int>& a, vector<int>& tmp, int left, int right) {
 void swap(int *a, int *b) {
     /* your code here */
     int temp;
-    *a = temp;
-    temp = *b;
-    *b = *a;
+    temp = *a;
+    *b = temp;
+    *a = *b;
+
+
+    //*a = temp;
+    //temp = *b;
+    //*b = *a;
 }
 
 // BubbleSort function
 void bubbleSort(int *a, int n) {
     /* your code here */
-    while(n < *a){
+    while(n > 0){
         for(int i = 0; i < n -1; i++){
             if(a[i] > a[i+1]){
                 swap(a[i], a[i+1]);
             }
         }
+        n--;
     }
 }
